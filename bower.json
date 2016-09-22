@@ -1,0 +1,17 @@
+{
+  "name": "treehouse-quote-generator",
+  "description": "Quote Generator App for Treehouse Class Project",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}
