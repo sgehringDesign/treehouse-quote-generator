@@ -4,7 +4,6 @@ var gulp = require('gulp'),
 
 
 gulp.task('build', function(){
-  console.log(1);
   return gulp.src(['./bower_components/jquery/dist/jquery.min.js', './js/script.js'])
     .pipe(gp_concat('concat.js'))
     .pipe(gp_uglify())
