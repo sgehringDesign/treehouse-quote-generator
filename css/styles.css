@@ -1,61 +1,149 @@
 body {
-  /*text-align: center;*/
-  background-color: #36b55c;
+  text-align: center;
+  background-color: #3e474f;
   color: white;
   font-family: 'Playfair Display', serif;
+  transition: background-color 0.7s ease;
 }
+
+body.orange {
+  background: #e97734 url(open-quote.png) no-repeat 50% -40%;
+}
+
+body.yellow {
+  background: #e3992b url(open-quote.png) no-repeat 50% -40%;
+}
+
+body.green {
+  background: #329577 url(open-quote.png) no-repeat 50% -40%;
+}
+
+body.blue {
+  background: #347aa9 url(open-quote.png) no-repeat 50% -40%;
+}
+
+body.purple {
+  background: #7d679c url(open-quote.png) no-repeat 50% -40%;
+}
+
+body.red {
+  background: #df535b url(open-quote.png) no-repeat 50% -40%;
+}
+
+.container {
+  width: 100%; 
+  height: 100%;
+  position: absolute;
+}
+
 #quote-box {
   position: absolute;
-  top: 20%;
+  top: 5%;
   left: 10%;
   right: 10%;
   width: 80%;
   line-height: .5;
+
+  top: 40%;
+  transform: translateY(-40%);
+  -ms-transform: translateY(-40%);
+  -moz-transform: translateY(-40%);
+  -webkit-transform: translateY(-40%);
+  -o-transform: translateY(-40%);
+
 }
-.quote {
-  font-size: 4rem;
+
+#quote-box p {
+  margin-top: 0;  
+}
+
+#quote {
   font-weight: 400;
-  line-height: 1.1;
+  font-style: italic;
+  line-height: 1.2em;
   position: relative;
   margin: 0;
-  } 
-.quote:before, .quote:after {
-  font-size: 6rem;
-  line-height: 2.5rem;
-  position: absolute;
 }
-.quote:before {
-  content: "“";
-  top: .25em;
-  left: -.5em;
+
+  
+#quote.tiny {
+  font-size: 4rem;
 }
-.quote:after {
-  content: "”";
-  bottom: -.1em;
-  margin-left: .1em;
-  position: absolute;
+  
+#quote.small {
+  font-size: 3rem;
 }
+
+#quote.medium {
+  font-size: 2.6rem;
+}
+
+#quote.large {
+  font-size: 2.2rem;
+}
+
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+  /*#quote {
+    font-size: 5vw;
+  }*/
+  
+  #quote.tiny {
+    font-size: 3rem;
+  }
+  
+  #quote.small {
+    font-size: 2rem;
+  }
+  
+  #quote.medium {
+    font-size: 1.5rem;
+  }
+  
+  #quote.large {
+    font-size: 1.2rem;
+  }
+  
+}
+
+@media only screen and (max-width: 40em) { 
+  #quote.tiny {
+    font-size: 2.4rem;
+  }
+  
+  #quote.tiny {
+    font-size: 1.7rem;
+  }
+}
+
+/* Medium only */
+/*
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+  #quote {
+    font-size: 5vw;
+  }
+}
+*/
+
+/* Large only */
+/*
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {
+   #quote {
+    font-size: 5vw;
+  }
+}
+*/
+
+
 .source {
-  font-size: 1.25rem;;
-  letter-spacing: 0.05em;
-  line-height: 1.1;
-  text-align: right;
-  margin-right: 4em;
+  font-size: 1rem;
+  line-height: 1em;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
 }
-.source:before {
-  content: "—";
-}
-.citation {
-  font-style: italic;
-}
-.citation:before {
-  content: ", ";
-  font-style: normal;
-}
-.year:before {
-  content: ", ";
-  font-style: normal;
-}
+
 
 #loadQuote {
   position: fixed;
@@ -63,29 +151,23 @@ body {
   display: inline-block;
   left: 50%;
   margin-left: -6em;
-  bottom: 150px;
+  bottom: 10%;
   border-radius: 4px;
   border: 2px solid #fff;
   color: #fff;
-  background-color: #36b55c;
+  background-color: rgba(255,255,255,0);;
   padding: 15px 0;
   transition: .5s ;
 }
+
 #loadQuote:hover {
   background-color: rgba(255,255,255,.25);
 }
+
 #loadQuote:focus {
   outline: none;
 }
 
-@media (max-width: 420px) {
-  .quote {
-    font-size: 2.5rem;
-  }
-  .quote:before, .quote:after {
-    font-size: 3rem;
-  }
-  .source {
-    font-size: 1rem;
-  }
-}
+
+
+
