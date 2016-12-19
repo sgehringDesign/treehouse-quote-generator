@@ -4,6 +4,8 @@
 
   // QUOTES ====================================================================================
   //-- DESCRIPTION: QUOTE ROTATION FUNCTIONALITY
+  
+  //-- NOTES: I still need to add error handling for if the API call returns bad
 
   //-- PROPERTIES:
   //---- url (string) : url to get the quote from quotesondesign.com
@@ -13,8 +15,13 @@
   //---- sizes (object) : quote sizes for responsive presentation
 
   //-- PRIVATE METHODS:
-  //----- getSelect() : get select tag and return as jquery object
-  //----- getInput() : get input or inputs and return as jquery object
+  //----- quoteIndex() : checks quote incriments. If it hits max length then reset to zero
+  //----- colorIndex() : get random color index the change color.  The do while loop ensure colors are not repeated.
+  //----- printQuote() : Prints quote on the screen with jquery 
+  //----- validateQuotes() : Santize and validate each quote in the returned quote data
+  //----- changeQuotes() : this fucntion fades in and out the quote and changes the quote content
+  //----- loadQuote() : valifates and loads quotes into the DOM after the API data has been returned 
+  //----- getQuotes() : get quotes from the rest API
   //----- getTextarea() : get textarea and return as jquery object
 
   //-- PUBLIC METHODS:
@@ -37,7 +44,7 @@
         current = 0,
         length = 0;
         api = {
-          url: 'http://quotesondesign.com/wp-json/posts',
+          url: 'https://quotesondesign.com/wp-json/posts',
           total: 30, 
           order: 'rand',
           querystring: '?filter[orderby]=' + order + '&filter[posts_per_page]=' + total + 'x&callback=',
@@ -79,6 +86,9 @@
     $.ajaxSetup({ cache: false });
 
 
+    // quoteIndex() : PRIVATE ------------------------------------------
+    //-- DESCRIPTION:    
+    //----- checks quote incriments. If it hits max length then reset to zero
     var quoteIndex = function (current) {
 
       if(current < length) {
@@ -87,25 +97,23 @@
         current = 0;
         return 0;
       }
+
     }
-    
+
+
+    // colorIndex() : PRIVATE ------------------------------------------
+    //-- DESCRIPTION:    
+    //----- get random color index the change color.  The do while loop ensure colors are not repeated.
     
     var colorIndex = function () {
 
-      console.log('!!!!!!!!!!!!!!!!!');
-      console.log(color);
-
       do {
-        //console('---');
         newcolor = Math.floor( ( Math.random() * colors.length ) + 0 );
-        console.log(newcolor);
       } while(color === newcolor);
 
-      console.log(newcolor);
-
       color = newcolor;
-
       return color;
+
     }
 
 
@@ -134,6 +142,7 @@
 
     //-- RETURNS: 
     //----- quotes (object) : results in the collect are cleaned of unnesscary HTML and checked for size
+
     validateQuotes = function (quotes) {
 
       var i = quotes.length;
@@ -141,16 +150,16 @@
       while (i--) {
 
         //- remove extra space and br tags in the api content returned
-        quotes[i].content = quotes[i].content.replace( '</p>' , '</p>' );
-        quotes[i].content = quotes[i].content.replace( '<br />' , '' );
-        quotes[i].content = quotes[i].content.replace( '<ul>' , '' );
-        quotes[i].content = quotes[i].content.replace( '</ul>' , '' );
-        quotes[i].content = quotes[i].content.replace( '</li>' , ', ' );
-        quotes[i].content = quotes[i].content.replace( '<li>' , '' );
+        quotes[i].content = quotes[i].content.replace( '</p>' , '</p>' ); // remove p tags
+        quotes[i].content = quotes[i].content.replace( '<br />' , '' ); // remove br tags
+        quotes[i].content = quotes[i].content.replace( '<ul>' , '' ); // remove ul tags
+        quotes[i].content = quotes[i].content.replace( '</ul>' , '' ); // remove ul tags
+        quotes[i].content = quotes[i].content.replace( '</li>' , ', ' ); // remove li tags
+        quotes[i].content = quotes[i].content.replace( '<li>' , '' ); // remove li tags
         quotes[i].content = $.trim(quotes[i].content);
-        quotes[i].content = quotes[i].content.replace( '. </p>' , '.</p>' );
-        quotes[i].content = quotes[i].content.replace( '.  </p>' , '.</p>' );
-        quotes[i].content = quotes[i].content.replace(/ (?=[^ ]*$)/i, "&nbsp;")
+        quotes[i].content = quotes[i].content.replace( '. </p>' , '.</p>' ); // extra space after sentance
+        quotes[i].content = quotes[i].content.replace( '.  </p>' , '.</p>' );  // extra space after sentance
+        quotes[i].content = quotes[i].content.replace(/ (?=[^ ]*$)/i, "&nbsp;");  // &nbsp; to fix orphans in responsive
 
         //- remove quotes over 300 charecters
         if(quotes[i].content.length > 300) {
@@ -171,13 +180,15 @@
 
       }
 
-      length = quotes.length;
+      length = quotes.length; // reset global length
 
       return quotes;
 
     }
 
-
+    // changeQuotes() : PRIVATE ------------------------------------------
+    //-- DESCRIPTION:    
+    //----- this fucntion fades in and out the quote and changes the quote content
     changeQuotes = function () {
       var $quoteBox = $(elements.container);
       current ++;
@@ -225,6 +236,7 @@
 
     // SET METHODS (PUBLIC) ___________________________________________
 
+/* TO BE ADDED FOR ERROR HANDLING -------------------------------------
     // Quotes.isLoaded() : PUBLIC -------------------------------------
     //-- RETURNS: protected "loaded"
     Quotes.isLoaded = function() {
@@ -236,6 +248,7 @@
     Quotes.isCompleted = function() {
       return completed;
     };
+*/
 
     return Quotes;
 
