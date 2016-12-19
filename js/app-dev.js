@@ -92,16 +92,9 @@
     
     var colorIndex = function () {
 
-      console.log('!!!!!!!!!!!!!!!!!');
-      console.log(color);
-
       do {
-        //console('---');
         newcolor = Math.floor( ( Math.random() * colors.length ) + 0 );
-        console.log(newcolor);
       } while(color === newcolor);
-
-      console.log(newcolor);
 
       color = newcolor;
 
