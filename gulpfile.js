@@ -28,9 +28,7 @@ gulp.task('concat', ['move'], function() {
   
 });
 
-gulp.task('compress', ['concat'], function (cb) {
-  console.log('1!!!!');
-  
+gulp.task('compress', ['concat'], function (cb) {  
   pump([ 
       gulp.src('./js/app.js'),
       gp_uglify(),
@@ -39,8 +37,6 @@ gulp.task('compress', ['concat'], function (cb) {
     cb
   );
   
-  console.log('2!!!!');
-
 });
 
 gulp.task('build', ['move', 'concat', 'compress'], function(){ 

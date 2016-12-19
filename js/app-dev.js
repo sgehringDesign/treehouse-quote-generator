@@ -37,7 +37,7 @@
         current = 0,
         length = 0;
         api = {
-          url: 'http://quotesondesign.com/wp-json/posts',
+          url: 'https://quotesondesign.com/wp-json/posts',
           total: 30, 
           order: 'rand',
           querystring: '?filter[orderby]=' + order + '&filter[posts_per_page]=' + total + 'x&callback=',
